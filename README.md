@@ -4,6 +4,7 @@ Python tapa puzzle
 # data structures
 ## the board
 matrix of cells
+any square dimension
 
 ## the cells
 ### part of solution
