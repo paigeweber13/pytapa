@@ -4,6 +4,11 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
+rope = "*"
+pylint = "*"
+autopep8 = "*"
+pytest-watch = "*"
+pytest = "*"
 
 [packages]
 pygame = "*"
