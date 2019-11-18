@@ -18,15 +18,26 @@ pygame.display.set_caption('Tapa')
 puzzleSolved = [[1, 1, 1], [1, 0, 1], [1, 1, 1]]
 puzzleDefault = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
 puzzle = puzzleDefault
+rectangles = []
+
+for row in puzzle:
+    rect[1] += 200
+    rect[0] = 0
+    for col in row:
+        rect = [0, 0, 190, 190]
+        pygame.draw.rect(gameDisplay, color, rect)
+        rect[0] += 200
 
 fps = pygame.time.Clock()
+
+color = white
 
 solved = False
 
 while not solved:
     
-    color = white
-    rect = [0, -200, 190, 190]
+    
+    #rect = [0, -200, 190, 190]
 
     for row in puzzle:
         rect[1] += 200
@@ -40,6 +51,10 @@ while not solved:
             solved = True
         elif event.type == pygame.MOUSEBUTTONDOWN:
             pos = pygame.mouse.get_pos()
+            if 0 <= pos[0] <= 190:
+                color = black
+                puzzle[0][0] = 1
+            
 
 
 
