@@ -19,14 +19,22 @@ puzzleSolved = [[1, 1, 1], [1, 0, 1], [1, 1, 1]]
 puzzleDefault = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
 puzzle = puzzleDefault
 rectangles = []
+colors = [[white, white, white], 
+          [white, white, white], 
+          [white, white, white]]
 
-for row in puzzle:
-    rect[1] += 200
-    rect[0] = 0
-    for col in row:
-        rect = [0, 0, 190, 190]
-        pygame.draw.rect(gameDisplay, color, rect)
-        rect[0] += 200
+# for row in puzzle:
+#     rect[1] += 200
+#     rect[0] = 0
+#     for col in row:
+#         rect = [0, 0, 190, 190]
+#         pygame.draw.rect(gameDisplay, color, rect)
+#         rect[0] += 200
+
+for i in range(len(puzzle)):
+    rectangles.append([])
+    for j in range(len(puzzle[i])):
+        rectangles[i].append([j*200, i*200, 190, 190])
 
 fps = pygame.time.Clock()
 
@@ -39,12 +47,13 @@ while not solved:
     
     #rect = [0, -200, 190, 190]
 
-    for row in puzzle:
-        rect[1] += 200
-        rect[0] = 0
-        for col in row:
-            pygame.draw.rect(gameDisplay, color, rect)
-            rect[0] += 200
+    for row in range(len(rectangles)):
+        # rect[1] += 200
+        # rect[0] = 0
+        for col in range(len(rectangles[row])):
+            pygame.draw.rect(gameDisplay, colors[row][col], 
+                             rectangles[row][col])
+            # rect[0] += 200
     
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -54,6 +63,7 @@ while not solved:
             if 0 <= pos[0] <= 190:
                 color = black
                 puzzle[0][0] = 1
+                colors[0][0] = black
             
 
 
