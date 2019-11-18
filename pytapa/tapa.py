@@ -23,11 +23,15 @@ for i in range(len(b.puzzle)):
         b.rectangles[i].append([j*(rect_Width + margin), i*(rect_Height + margin), rect_Width, rect_Height])
 
 fps = pygame.time.Clock()
+hint8 = pygame.image.load("8hint.JPG")
+
+def hint(x,y):
+    gameDisplay.blit(hint8, (x, y))
 
 color = white
 
 while not b.solved:
-
+    
     for row in range(len(b.rectangles)):
         for col in range(len(b.rectangles[row])):
             if b.puzzle[row][col] == 0:
@@ -36,6 +40,8 @@ while not b.solved:
             else:
                 pygame.draw.rect(gameDisplay, black, 
                                  b.rectangles[row][col])
+
+    hint((rect_Width + margin), (rect_Height + margin))
     
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
