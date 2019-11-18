@@ -24,13 +24,14 @@ for i in range(len(b.puzzle)):
 
 fps = pygame.time.Clock()
 hint8 = pygame.image.load("8hint.JPG")
+solvedImg = pygame.image.load("solved.JPG")
 
 def hint(x,y):
     gameDisplay.blit(hint8, (x, y))
 
 color = white
 
-while not b.solved:
+while not b.done:
     
     for row in range(len(b.rectangles)):
         for col in range(len(b.rectangles[row])):
@@ -45,7 +46,7 @@ while not b.solved:
     
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            b.solved = True
+            b.done = True
         elif event.type == pygame.MOUSEBUTTONDOWN:
             pos = pygame.mouse.get_pos()
             if 0 <= pos[0] <= rect_Width and 0 <= pos[1] <= rect_Height:
@@ -107,6 +108,9 @@ while not b.solved:
             
     
     b.checkSolved()
+    if b.solved == True:
+        gameDisplay.fill(black)
+        gameDisplay.blit(solvedImg, (0, 0))
             
 
 
