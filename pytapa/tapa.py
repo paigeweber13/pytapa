@@ -1,13 +1,13 @@
-import pygame
+import pygame, puzzle
 
 pygame.init()
 
 game_Height = 590
 game_Width =  590
 
-square_Height = 190
-square_Width = 190
-margin = 5
+rect_Height = 190
+rect_Width = 190
+margin = 10
 
 black = (0, 0, 0)
 white = (255, 255, 255)
@@ -15,26 +15,12 @@ white = (255, 255, 255)
 gameDisplay = pygame.display.set_mode((game_Width, game_Height))
 pygame.display.set_caption('Tapa')
 
-puzzleSolved = [[1, 1, 1], [1, 0, 1], [1, 1, 1]]
-puzzleDefault = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
-puzzle = puzzleDefault
-rectangles = []
-colors = [[white, white, white], 
-          [white, white, white], 
-          [white, white, white]]
+b = puzzle.Board()
 
-# for row in puzzle:
-#     rect[1] += 200
-#     rect[0] = 0
-#     for col in row:
-#         rect = [0, 0, 190, 190]
-#         pygame.draw.rect(gameDisplay, color, rect)
-#         rect[0] += 200
-
-for i in range(len(puzzle)):
-    rectangles.append([])
-    for j in range(len(puzzle[i])):
-        rectangles[i].append([j*200, i*200, 190, 190])
+for i in range(len(b.puzzle)):
+    b.rectangles.append([])
+    for j in range(len(b.puzzle[i])):
+        b.rectangles[i].append([j*(rect_Width + margin), i*(rect_Height + margin), rect_Width, rect_Height])
 
 fps = pygame.time.Clock()
 
@@ -43,17 +29,15 @@ color = white
 solved = False
 
 while not solved:
-    
-    
-    #rect = [0, -200, 190, 190]
 
-    for row in range(len(rectangles)):
-        # rect[1] += 200
-        # rect[0] = 0
-        for col in range(len(rectangles[row])):
-            pygame.draw.rect(gameDisplay, colors[row][col], 
-                             rectangles[row][col])
-            # rect[0] += 200
+    for row in range(len(b.rectangles)):
+        for col in range(len(b.rectangles[row])):
+            if b.puzzle[row][col] == 0:
+                pygame.draw.rect(gameDisplay, white, 
+                                 b.rectangles[row][col])
+            else:
+                pygame.draw.rect(gameDisplay, black, 
+                                 b.rectangles[row][col])
     
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -62,8 +46,7 @@ while not solved:
             pos = pygame.mouse.get_pos()
             if 0 <= pos[0] <= 190:
                 color = black
-                puzzle[0][0] = 1
-                colors[0][0] = black
+                b.puzzle[0][0] = 1
             
 
 
