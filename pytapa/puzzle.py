@@ -3,11 +3,13 @@ class Board():
     puzzleDefault = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
     puzzle = puzzleDefault
     rectangles = []
+    done = False
     solved = False
 
     def checkSolved(self):
         if self.puzzle == self.puzzleSolved:
             self.solved = True
+
 
 
 class Hint():
