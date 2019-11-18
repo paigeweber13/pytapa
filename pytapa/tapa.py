@@ -30,6 +30,7 @@ while not solved:
 
     for row in puzzle:
         rect[1] += 200
+        rect[0] = 0
         for col in row:
             pygame.draw.rect(gameDisplay, color, rect)
             rect[0] += 200
