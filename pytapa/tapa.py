@@ -26,9 +26,7 @@ fps = pygame.time.Clock()
 
 color = white
 
-solved = False
-
-while not solved:
+while not b.solved:
 
     for row in range(len(b.rectangles)):
         for col in range(len(b.rectangles[row])):
@@ -44,9 +42,11 @@ while not solved:
             solved = True
         elif event.type == pygame.MOUSEBUTTONDOWN:
             pos = pygame.mouse.get_pos()
-            if 0 <= pos[0] <= 190:
+            if 0 <= pos[0] <= 190 and 0 <= pos[1] <= 190:
                 color = black
                 b.puzzle[0][0] = 1
+    
+    b.checkSolved()
             
 
 
