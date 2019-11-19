@@ -1,5 +1,5 @@
 class Board():
-    puzzleSolved = [[1, 1, 1], [1, 8, 1], [1, 1, 1]]
+    puzzleSolved = [[1, 1, 1, 1, 1], [1, 0, 1, 0, 1], [1, 1, 4, 1, 1], [1, 0, 1, 7, 1], [1, 1, 1, 1, 1]]
     puzzleDefault = []
     for i in range(len(puzzleSolved)):
         puzzleDefault.append([])
