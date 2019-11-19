@@ -2,37 +2,43 @@ import pygame, puzzle
 
 pygame.init()
 
-game_Height = 590
-game_Width =  590
+def hint(img, x,y):
+    img = pygame.transform.scale(img, (rect_Width, rect_Height))
+    gameDisplay.blit(img, (x, y))
 
+# Constants
+black = (0, 0, 0)
+white = (255, 255, 255)
+fps = pygame.time.Clock()
+
+# Images
+hint8 = pygame.image.load("8hint.JPG")
+solvedImg = pygame.image.load("solved.JPG")
+
+b = puzzle.Board()
+
+# Rectangle Dimensions
 rect_Height = 190
 rect_Width = 190
 margin = 10
 
-black = (0, 0, 0)
-white = (255, 255, 255)
-
-gameDisplay = pygame.display.set_mode((game_Width, game_Height))
-pygame.display.set_caption('Tapa')
-
-b = puzzle.Board()
-
+# Build list of rectangles
 for i in range(len(b.puzzle)):
     b.rectangles.append([])
     for j in range(len(b.puzzle[i])):
         b.rectangles[i].append([j*(rect_Width + margin), i*(rect_Height + margin), rect_Width, rect_Height])
 
-fps = pygame.time.Clock()
-hint8 = pygame.image.load("8hint.JPG")
-solvedImg = pygame.image.load("solved.JPG")
+# Build the game screen
+dimension = len(b.rectangles)
+game_Height = rect_Height * dimension + margin * (dimension - 1)
+game_Width = rect_Width * dimension + margin * (dimension - 1)
+gameDisplay = pygame.display.set_mode((game_Width, game_Height))
+pygame.display.set_caption('Tapa')
 
-def hint(x,y):
-    gameDisplay.blit(hint8, (x, y))
-
-color = white
-
+# Run the puzzle loop
 while not b.done:
-    
+
+    # Display the rectangles
     for row in range(len(b.rectangles)):
         for col in range(len(b.rectangles[row])):
             if b.puzzle[row][col] == 0:
@@ -42,11 +48,14 @@ while not b.done:
                 pygame.draw.rect(gameDisplay, black, 
                                  b.rectangles[row][col])
 
-    hint((rect_Width + margin), (rect_Height + margin))
+    # Display the hint
+    hint(hint8, (rect_Width + margin), (rect_Height + margin))
     
+    # Check for events
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             b.done = True
+        ## Makes clicks interact with the rectangles
         elif event.type == pygame.MOUSEBUTTONDOWN:
             pos = pygame.mouse.get_pos()
             y = int(pos[0]/rect_Width) 
@@ -54,10 +63,12 @@ while not b.done:
 
             if b.puzzle[x][y] == 0:
                 b.puzzle[x][y] = 1
-            else:
+            elif b.puzzle[x][y] == 1:
                 b.puzzle[x][y] = 0 
     
     b.checkSolved()
+
+    # Display solved screen when finished
     if b.solved == True:
         gameDisplay.fill(black)
         gameDisplay.blit(solvedImg, (0, 0))
