@@ -11,16 +11,12 @@ black = (0, 0, 0)
 white = (255, 255, 255)
 fps = pygame.time.Clock()
 
-# Images
-hint8 = pygame.image.load("8hint.JPG")
-solvedImg = pygame.image.load("solved.JPG")
-
 b = puzzle.Board()
 
 # Rectangle Dimensions
-rect_Height = 190
-rect_Width = 190
-margin = 10
+rect_Height = 200
+rect_Width = 200
+margin = 5
 
 # Build list of rectangles
 for i in range(len(b.puzzle)):
@@ -35,6 +31,11 @@ game_Height = rect_Height * numCol + margin * (numCol - 1)
 game_Width = rect_Width * numRow + margin * (numRow - 1)
 gameDisplay = pygame.display.set_mode((game_Width, game_Height))
 pygame.display.set_caption('Tapa')
+
+# Images
+hint8 = pygame.image.load("8hint.JPG")
+solvedImg = pygame.image.load("solved.JPG")
+solvedImg = pygame.transform.scale(solvedImg, (rect_Width*2, game_Height // 4))
 
 # Run the puzzle loop
 while not b.done:
@@ -71,7 +72,7 @@ while not b.done:
     # Display solved screen when finished
     if b.solved == True:
         gameDisplay.fill(black)
-        gameDisplay.blit(solvedImg, (0, 0))
+        gameDisplay.blit(solvedImg, (game_Width // 2 - rect_Width, game_Height // 2 - game_Height // 8))
             
 
 
