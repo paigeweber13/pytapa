@@ -29,9 +29,10 @@ for i in range(len(b.puzzle)):
         b.rectangles[i].append([j*(rect_Width + margin), i*(rect_Height + margin), rect_Width, rect_Height])
 
 # Build the game screen
-dimension = len(b.rectangles)
-game_Height = rect_Height * dimension + margin * (dimension - 1)
-game_Width = rect_Width * dimension + margin * (dimension - 1)
+numCol = len(b.rectangles)
+numRow = len(b.rectangles[0])
+game_Height = rect_Height * numCol + margin * (numCol - 1)
+game_Width = rect_Width * numRow + margin * (numRow - 1)
 gameDisplay = pygame.display.set_mode((game_Width, game_Height))
 pygame.display.set_caption('Tapa')
 
