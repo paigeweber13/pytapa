@@ -6,11 +6,29 @@ def hint(img, x,y):
     img = pygame.transform.scale(img, (rect_Width, rect_Height))
     gameDisplay.blit(img, (x, y))
 
+# Display the rectangles
+def displayTiles():
+    for row in range(len(b.rectangles)):
+        for col in range(len(b.rectangles[row])):
+            if b.puzzle[row][col] == 0:
+                pygame.draw.rect(gameDisplay, white, 
+                                 b.rectangles[row][col])
+            elif b.puzzle[row][col] == 8:
+                hint(hint8, (rect_Width * col + margin * col), (rect_Height * row + margin * row))
+            elif b.puzzle[row][col] == 4:
+                hint(hint4, (rect_Width * col + margin * col), (rect_Height * row + margin * row))
+            elif b.puzzle[row][col] == 1111:
+                hint(hint1111, (rect_Width * col + margin * col), (rect_Height * row + margin * row))
+            elif b.puzzle[row][col] == 7:
+                hint(hint7, (rect_Width * col + margin * col), (rect_Height * row + margin * row))
+            else:
+                pygame.draw.rect(gameDisplay, black, 
+                                 b.rectangles[row][col])
+
 # Constants
 black = (0, 0, 0)
 white = (255, 255, 255)
 fps = pygame.time.Clock()
-
 b = puzzle.Board()
 
 # Rectangle Dimensions
@@ -42,25 +60,7 @@ solvedImg = pygame.transform.scale(solvedImg, (rect_Width*2, game_Height // 4))
 
 # Run the puzzle loop
 while not b.done:
-
-    # Display the rectangles
-    for row in range(len(b.rectangles)):
-        for col in range(len(b.rectangles[row])):
-            if b.puzzle[row][col] == 0:
-                pygame.draw.rect(gameDisplay, white, 
-                                 b.rectangles[row][col])
-            elif b.puzzle[row][col] == 8:
-                hint(hint8, (rect_Width * col + margin * col), (rect_Height * row + margin * row))
-            elif b.puzzle[row][col] == 4:
-                hint(hint4, (rect_Width * col + margin * col), (rect_Height * row + margin * row))
-            elif b.puzzle[row][col] == 1111:
-                hint(hint1111, (rect_Width * col + margin * col), (rect_Height * row + margin * row))
-            elif b.puzzle[row][col] == 7:
-                hint(hint7, (rect_Width * col + margin * col), (rect_Height * row + margin * row))
-            else:
-                pygame.draw.rect(gameDisplay, black, 
-                                 b.rectangles[row][col])
-    
+ 
     # Check for events
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -76,6 +76,7 @@ while not b.done:
             elif b.puzzle[x][y] == 1:
                 b.puzzle[x][y] = 0 
     
+    displayTiles()
     b.checkSolved()
 
     # Display solved screen when finished
@@ -83,8 +84,5 @@ while not b.done:
         gameDisplay.fill(black)
         gameDisplay.blit(solvedImg, (game_Width // 2 - rect_Width, game_Height // 2 - game_Height // 8))
             
-
-
-
     pygame.display.update()
     fps.tick(60)
