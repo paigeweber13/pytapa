@@ -32,8 +32,8 @@ fps = pygame.time.Clock()
 b = puzzle.Board()
 
 # Rectangle Dimensions
-rect_Height = 150
-rect_Width = 150
+rect_Height = 100
+rect_Width = 100
 margin = 5
 
 # Build list of rectangles
