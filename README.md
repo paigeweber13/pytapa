@@ -20,4 +20,3 @@ can have up to four numbers
 ability to navigate between puzzles
 save progess
 autogenerating board from text file
-impliment an improved way to track user clicks and then impliment the changes
