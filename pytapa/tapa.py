@@ -45,12 +45,11 @@ while not b.done:
             if b.puzzle[row][col] == 0:
                 pygame.draw.rect(gameDisplay, white, 
                                  b.rectangles[row][col])
+            elif b.puzzle[row][col] == 8:
+                hint(hint8, (rect_Width * col + margin * col), (rect_Height * row + margin * row))
             else:
                 pygame.draw.rect(gameDisplay, black, 
                                  b.rectangles[row][col])
-
-    # Display the hint
-    hint(hint8, (rect_Width + margin), (rect_Height + margin))
     
     # Check for events
     for event in pygame.event.get():
