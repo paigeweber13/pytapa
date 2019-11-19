@@ -137,10 +137,8 @@ def puzzleSolve():
         if b.solved == True:
             gameDisplay.fill(black)
             gameDisplay.blit(solvedImg, (0, 0))
-            for event in pygame.event.get():
-                if event.type == pygame.MOUSEBUTTONDOWN:
-                    b.solved = False
-                    break
+                    
+
 
 
 
