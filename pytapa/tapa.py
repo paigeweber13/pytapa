@@ -49,63 +49,13 @@ while not b.done:
             b.done = True
         elif event.type == pygame.MOUSEBUTTONDOWN:
             pos = pygame.mouse.get_pos()
-            if 0 <= pos[0] <= rect_Width and 0 <= pos[1] <= rect_Height:
-                if b.puzzle[0][0] == 0:
-                    color = black
-                    b.puzzle[0][0] = 1
-                else:
-                    color = white
-                    b.puzzle[0][0] = 0
-            elif (rect_Width + margin) <= pos[0] <= (rect_Width*2 + margin) and 0 <= pos[1] <= rect_Height:
-                if b.puzzle[0][1] == 0:
-                    color = black
-                    b.puzzle[0][1] = 1
-                else:
-                    color = white
-                    b.puzzle[0][1] = 0
-            elif (rect_Width*2 + margin*2) <= pos[0] <= (rect_Width*3 + margin*2) and 0 <= pos[1] <= rect_Height:
-                if b.puzzle[0][2] == 0:
-                    color = black
-                    b.puzzle[0][2] = 1
-                else:
-                    color = white
-                    b.puzzle[0][2] = 0
-            elif 0 <= pos[0] <= rect_Width and (rect_Height  + margin) <= pos[1] <= (rect_Height*2 + margin):
-                if b.puzzle[1][0] == 0:
-                    color = black
-                    b.puzzle[1][0] = 1
-                else:
-                    color = white
-                    b.puzzle[1][0] = 0
-            elif (rect_Width*2 + margin*2) <= pos[0] <= (rect_Width*3 + margin*2) and (rect_Height + margin) <= pos[1] <= (rect_Height*2 + margin):
-                if b.puzzle[1][2] == 0:
-                    color = black
-                    b.puzzle[1][2] = 1
-                else:
-                    color = white
-                    b.puzzle[1][2] = 0
-            elif 0 <= pos[0] <= rect_Width and (rect_Height*2 + margin*2) <= pos[1] <= (rect_Height*3 + margin*2):
-                if b.puzzle[2][0] == 0:
-                    color = black
-                    b.puzzle[2][0] = 1
-                else:
-                    color = white
-                    b.puzzle[2][0] = 0
-            elif (rect_Width + margin) <= pos[0] <= (rect_Width*2 + margin) and (rect_Height*2 + margin*2) <= pos[1] <= (rect_Height*3 + margin*2):
-                if b.puzzle[2][1] == 0:
-                    color = black
-                    b.puzzle[2][1] = 1
-                else:
-                    color = white
-                    b.puzzle[2][1] = 0
-            elif (rect_Width*2 + margin*2) <= pos[0] <= (rect_Width*3 + margin*2) and (rect_Height*2 + margin*2) <= pos[1] <= (rect_Height*3 + margin*2):
-                if b.puzzle[2][2] == 0:
-                    color = black
-                    b.puzzle[2][2] = 1
-                else:
-                    color = white
-                    b.puzzle[2][2] = 0
-            
+            y = int(pos[0]/rect_Width) 
+            x = int(pos[1]/rect_Height)
+
+            if b.puzzle[x][y] == 0:
+                b.puzzle[x][y] = 1
+            else:
+                b.puzzle[x][y] = 0 
     
     b.checkSolved()
     if b.solved == True:
