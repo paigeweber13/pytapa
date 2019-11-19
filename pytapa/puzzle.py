@@ -1,6 +1,14 @@
 class Board():
     puzzleSolved = [[1, 1, 1], [1, 3, 1], [1, 1, 1]]
-    puzzleDefault = [[0, 0, 0], [0, 3, 0], [0, 0, 0]]
+    puzzleDefault = []
+    for i in range(len(puzzleSolved)):
+        puzzleDefault.append([])
+        for j in range(len(puzzleSolved[i])):
+            if puzzleSolved[i][j] == 3:
+                puzzleDefault[i].append(3)
+            else:
+                puzzleDefault[i].append(0)
+    
     puzzle = puzzleDefault
     rectangles = []
     done = False
