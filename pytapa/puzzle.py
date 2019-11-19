@@ -1,6 +1,6 @@
 class Board():
-    puzzleSolved = [[1, 1, 1], [1, 0, 1], [1, 1, 1]]
-    puzzleDefault = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
+    puzzleSolved = [[1, 1, 1], [1, 3, 1], [1, 1, 1]]
+    puzzleDefault = [[0, 0, 0], [0, 3, 0], [0, 0, 0]]
     puzzle = puzzleDefault
     rectangles = []
     done = False
