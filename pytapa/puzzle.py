@@ -1,11 +1,11 @@
 class Board():
-    puzzleSolved = [[1, 1, 1], [1, 3, 1], [1, 1, 1]]
+    puzzleSolved = [[1, 1, 1], [1, 8, 1], [1, 1, 1]]
     puzzleDefault = []
     for i in range(len(puzzleSolved)):
         puzzleDefault.append([])
         for j in range(len(puzzleSolved[i])):
-            if puzzleSolved[i][j] == 3:
-                puzzleDefault[i].append(3)
+            if puzzleSolved[i][j] >= 3:
+                puzzleDefault[i].append(puzzleSolved[i][j])
             else:
                 puzzleDefault[i].append(0)
     
