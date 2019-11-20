@@ -130,6 +130,7 @@ def solve(default):
                             if ls5 == 5:
                                 solveHint(default, 5, row, col)
                     # Solves hint4
+                    
                                                    
         print(default)
         break

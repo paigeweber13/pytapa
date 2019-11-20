@@ -64,8 +64,6 @@ hint7 = pygame.image.load("hint7.JPG")
 solvedImg = pygame.image.load("solved.JPG")
 solvedImg = pygame.transform.scale(solvedImg, (rect_Width*2, game_Height // 4))
 
-print(b.puzzle)
-
 # Run the puzzle loop
 while not b.done:
  
