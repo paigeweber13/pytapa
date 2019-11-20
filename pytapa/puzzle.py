@@ -1,5 +1,5 @@
 class Board():
-    puzzleSolved = [[1, 1, 1, 1, 1], [1, 0, 1, 0, 1], [1, 1, 1111, 1, 1], [1, 0, 1, 7, 1], [1, 1, 1, 1, 1]]
+    puzzleSolved = [[1, 1, 1, 1, 1], [1, 2, 1, 2, 1], [1, 1, 1111, 1, 1], [1, 2, 1, 7, 1], [1, 1, 1, 1, 1]]
     puzzleDefault = []
     
     def createDefault(self):

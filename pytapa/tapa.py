@@ -13,6 +13,9 @@ def displayTiles():
             if b.puzzle[row][col] == 0:
                 pygame.draw.rect(gameDisplay, white, 
                                  b.rectangles[row][col])
+            elif b.puzzle[row][col] == 2:
+                pygame.draw.rect(gameDisplay, grey, 
+                                 b.rectangles[row][col])
             elif b.puzzle[row][col] == 8:
                 hint(hint8, (rect_Width * col + margin * col), (rect_Height * row + margin * row))
             elif b.puzzle[row][col] == 4:
@@ -28,6 +31,7 @@ def displayTiles():
 # Constants
 black = (0, 0, 0)
 white = (255, 255, 255)
+grey = (192,192,192)
 fps = pygame.time.Clock()
 b = puzzle.Board()
 b.createDefault()
@@ -78,6 +82,8 @@ while not b.done:
             if b.puzzle[x][y] == 0:
                 b.puzzle[x][y] = 1
             elif b.puzzle[x][y] == 1:
+                b.puzzle[x][y] = 2
+            elif b.puzzle[x][y] == 2:
                 b.puzzle[x][y] = 0 
     
     displayTiles()
