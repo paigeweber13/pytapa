@@ -41,12 +41,18 @@ def solve(default):
                     # Solves hint8 
                     solveHint(default, 8, row, col)
                     # Solves hint7  
-                    ls = checkHint(default, 7, row, col)
-                    if ls == 7:
+                    ls7 = checkHint(default, 7, row, col)
+                    if ls7 == 7:
                         solveHint(default, 7, row, col)
+                    # Solves hint6
+                    ls6 = checkHint(default, 6, row, col)
+                    if ls6 == 6:
+                        solveHint(default, 6, row, col)
+                    # Solves hint 5
+                    
                                                    
         print(default)
         break
 
-puzzledefault = [[0,2,0],[0,7,0],[0,0,0]]
+puzzledefault = [[0,0,0],[2,6,0],[2,0,0]]
 solution = solve(puzzledefault)
