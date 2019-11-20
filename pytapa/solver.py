@@ -2,29 +2,51 @@ import puzzle
 
 b = puzzle.Board()
 
-def solve(puzzle):
-    print(puzzle)
+def solveHint(coordinate, hint, x, y):
+    if coordinate[x][y] == hint:
+        vr = -2
+        for i in range(len(coordinate)):
+            vr += 1
+            hz = -2
+            for j in range(len(coordinate[x])):
+                hz += 1
+                if coordinate[x+vr][y+hz] >= 2:
+                    continue
+                else:
+                    coordinate[x+vr][y+hz] = 1
+
+def checkHint(coordinate, hint, x, y):
+    if coordinate[x][y] == hint:
+        ls = []
+        vr = -2
+        for i in range(len(coordinate)):
+            vr += 1
+            hz = -2
+            for j in range(len(coordinate[x])):
+                hz += 1
+                if coordinate[x+vr][y+hz] >= 2:
+                    continue
+                else:
+                    ls.append(coordinate[x+vr][y+hz])
+        ls = len(ls)
+        return ls
+
+def solve(default):
+    print(default)
     solved = False
     while not solved:
-        for row in range(len(puzzle)):
-            for col in range(len(puzzle[row])):
-                if puzzle[row][col] >= 3:
-                    if puzzle[row][col] == 8:
-                        if 0 < row < len(puzzle)-1 and 0 < col < len(puzzle)-1:
-                            vr = -2
-                            for i in range(len(puzzle)):
-                                vr += 1
-                                hz = -2
-                                for j in range(len(puzzle[row])):
-                                    hz += 1
-                                    if puzzle[row+vr][col+hz] >= 3:
-                                        continue
-                                    else:
-                                        puzzle[row+vr][col+hz] = 1
-                                    
-                                
-        print(puzzle)
+        for row in range(len(default)):
+            for col in range(len(default[row])):
+                if default[row][col] >= 3:
+                    # Solves hint8 
+                    solveHint(default, 8, row, col)
+                    # Solves hint7  
+                    ls = checkHint(default, 7, row, col)
+                    if ls == 7:
+                        solveHint(default, 7, row, col)
+                                                   
+        print(default)
         break
 
-default = [[0,0,0],[0,8,0],[0,0,0]]
-solution = solve(default)
+puzzledefault = [[0,2,0],[0,7,0],[0,0,0]]
+solution = solve(puzzledefault)
