@@ -239,10 +239,85 @@ def solve(default):
                             if ls4 == 4:
                                 solveHint(default, 4, row, col)
                     # Solves hint3
-
+                    if default[row][col] == 3:
+                        pos = checkPosition(default, row, col)
+                        if pos == 'top':
+                            ls3 = checkHintTop(default, 3, row, col)
+                            if ls3 == 3:
+                                solveHintTop(default, 3, row, col)
+                            else:
+                                default[row+1][col] = 1
+                        elif pos == 'bottom':
+                            ls3 = checkHintBottom(default, 3, row, col)
+                            if ls3 == 3:
+                                solveHintBottom(default, 3, row, col)
+                            else:
+                                default[row-1][col] = 1
+                        elif pos == 'sideL':
+                            ls3 = checkHintSideL(default, 3, row, col)
+                            if ls3 == 3:
+                                solveHintSideL(default, 3, row, col)
+                            else:
+                                default[row][col+1] = 1
+                        elif pos == 'sideR':
+                            ls3 = checkHintSideR(default, 3, row, col)
+                            if ls3 == 3:
+                                solveHintSideR(default, 3, row, col)
+                            else:
+                                default[row][col-1] = 1
+                        elif pos == 'center':
+                            ls3 = checkHint(default, 3, row, col)
+                            if ls3 == 3:
+                                solveHint(default, 3, row, col)
+                    # Solves hint2
+                    if default[row][col] == 12:
+                        pos = checkPosition(default, row, col)
+                        if pos == 'top':
+                            ls3 = checkHintTop(default, 12, row, col)
+                            if ls3 == 2:
+                                solveHintTop(default, 12, row, col)
+                        elif pos == 'bottom':
+                            ls3 = checkHintBottom(default, 12, row, col)
+                            if ls3 == 2:
+                                solveHintBottom(default, 12, row, col)
+                        elif pos == 'sideL':
+                            ls3 = checkHintSideL(default, 12, row, col)
+                            if ls3 == 2:
+                                solveHintSideL(default, 12, row, col)
+                        elif pos == 'sideR':
+                            ls3 = checkHintSideR(default, 12, row, col)
+                            if ls3 == 2:
+                                solveHintSideR(default, 12, row, col)
+                        elif pos == 'center':
+                            ls3 = checkHint(default, 12, row, col)
+                            if ls3 == 2:
+                                solveHint(default, 12, row, col)
+                    # Solves hint1
+                    if default[row][col] == 11:
+                        pos = checkPosition(default, row, col)
+                        if pos == 'top':
+                            ls3 = checkHintTop(default, 11, row, col)
+                            if ls3 == 1:
+                                solveHintTop(default, 11, row, col)
+                        elif pos == 'bottom':
+                            ls3 = checkHintBottom(default, 11, row, col)
+                            if ls3 == 1:
+                                solveHintBottom(default, 11, row, col)
+                        elif pos == 'sideL':
+                            ls3 = checkHintSideL(default, 11, row, col)
+                            if ls3 == 1:
+                                solveHintSideL(default, 11, row, col)
+                        elif pos == 'sideR':
+                            ls3 = checkHintSideR(default, 11, row, col)
+                            if ls3 == 1:
+                                solveHintSideR(default, 11, row, col)
+                        elif pos == 'center':
+                            ls3 = checkHint(default, 11, row, col)
+                            if ls3 == 1:
+                                solveHint(default, 11, row, col)
                                                    
         print(default)
         break
 
-puzzledefault = [[0,0,0],[5,0,0],[0,0,0]]
+puzzledefault = [[0,0,0],[0,8,0],[0,0,0]]
 solution = solve(puzzledefault)
