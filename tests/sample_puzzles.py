@@ -36,3 +36,28 @@ valid_sample_puzzles = [
                      [1,1,21,4,1,0,4,1,1,1]],
     }
 ]
+
+invalid_sample_puzzles = [
+    {
+        # invalid because has a 2x2 square of 1s
+        'solution': [[1,1,0],
+                     [1,1,0],
+                     [0,0,0]]
+    },
+    {
+        # invalid because has a 2x2 square of 1s
+        # more difficult to catch than previous example
+        'solution': [[1,0,0,0,0,0],
+                     [1,1,0,1,1,1],
+                     [0,1,1,0,1,1],
+                     [1,0,1,1,1,0],
+                     [1,1,1,0,0,0],
+                     [1,0,0,0,0,0]]
+    },
+    {
+        # invalid because solution is not a continuous line
+        'solution': [[1,0,0],
+                     [1,0,1],
+                     [0,0,1]]
+    }
+]
