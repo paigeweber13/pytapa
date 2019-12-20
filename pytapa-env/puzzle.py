@@ -6,10 +6,14 @@ cell_codes = set([
     # all other codes are hints. 
     # these hints are pretty intuitive, you just have one or more in a cell
     8, 7, 6, 5, 51, 4, 41, 42, 3, 33, 32, 311, 31, 22, 2, 21, 221, 211,
-    # the hints that involve one have one more digit than the actual number of
-    # hints. For instance, 11 is a cell with only '1' as the hint. 111 is a
+
+    # the hints that involve '1' have one more digit than the actual number of
+    # hints. For instance, '11' is a cell with only '1' as the hint. 111 is a
     # cell with '1   1' as the hint (two ones)
-    11, 111, 1111, 11111
+    11, 111, 1111, 11111,
+
+    # 10 is code for the hint 0
+    10
 ])
 
 class Puzzle():
