@@ -6,6 +6,7 @@ def validate_solution(solution):
     #   * are there no blocks of 2x2 or bigger?
     #   * does it obey hints?
     n = len(solution)
+    filled_cell_locations = []
 
     for row_i in range(len(solution)):
         # is it square? are all rows of same length?
@@ -19,6 +20,8 @@ def validate_solution(solution):
             if solution[row_i][col_i] not in puzzle.cell_codes:
                 print('Invalid entry:', solution[row_i][col_i])
                 return False
+            if solution[row_i][col_i] == 1:
+                filled_cell_locations.append((row_i, col_i))
     
     return True
 
