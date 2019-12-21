@@ -1,3 +1,5 @@
+from copy import deepcopy
+
 cell_codes = set([
     # 0 means the cell is not filled 
     # 1 means the cell is filled 
@@ -20,7 +22,7 @@ class Puzzle():
     def __init__(self, solution):
         # TODO: validate solution here:
         self.solution = solution
-        self.current_state = solution
+        self.current_state = deepcopy(solution)
 
         # for current state, nothing is filled in initially
         for row_i in range(len(self.current_state)):
