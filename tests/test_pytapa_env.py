@@ -13,14 +13,19 @@ class TestPytapaEnv(unittest.TestCase):
         self.invalid_solutions = deepcopy(
             sample_puzzles.invalid_sample_puzzles)
 
+    def tearDown(self):
+        print('checking if sample_puzzles were edited')
+        self.assertEqual(self.valid_solutions, 
+            sample_puzzles.valid_sample_puzzles)
+        self.assertEqual(self.invalid_solutions, 
+            sample_puzzles.invalid_sample_puzzles)
+
+
     def test_constructor(self):
         for puzzle in self.valid_solutions:
             p = Puzzle(puzzle['solution'])
             self.assertEqual(p.current_state, puzzle['start'])
             self.assertEqual(p.solution, puzzle['solution'])
-
-        self.assertEqual(self.valid_solutions, 
-            sample_puzzles.valid_sample_puzzles)
 
     def test_find_all(self):
         l = [0, 1, 3, 5, 1, 1, 5, 3, 5, 1, 1, 1]
@@ -36,15 +41,7 @@ class TestPytapaEnv(unittest.TestCase):
     def test_validation_of_valid_tests(self):
         for puzzle in self.valid_solutions:
             assert solver.validate_solution(puzzle['solution'])
-        
-        self.assertEqual(self.valid_solutions, 
-            sample_puzzles.valid_sample_puzzles)
 
     def test_validation_of_invalid_tests(self):
         for puzzle in self.invalid_solutions:
             assert not solver.validate_solution(puzzle['solution'])
-
-        self.assertEqual(self.valid_solutions, 
-            sample_puzzles.valid_sample_puzzles)
-        self.assertEqual(self.invalid_solutions, 
-            sample_puzzles.invalid_sample_puzzles)
