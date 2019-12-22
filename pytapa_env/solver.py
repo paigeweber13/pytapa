@@ -41,6 +41,64 @@ def explore(start_point: (int, int), still_unexplored: set) -> set:
     # if point is a 0, still_unexplored will not be edited before returning it
     return still_unexplored
 
+def check_if_hint_is_satisfied(i, j, solution):
+    """
+    i and j are the row and column index, respectively, of the hint we're
+    checking
+    """
+    n = len(solution)
+    adjacent_blobs = []
+    in_blob = False
+    current_blob_size = 0
+    # this order was chosen so that we move clockwise around the hint cell,
+    # starting at the top-left corner
+    adjustments = [(-1,-1),(-1,0),(-1,1),(0,1),(1,1),(1,0),(1,-1),(0,-1)]
+
+    # find all blobs
+    for i_adjust, j_adjust in adjustments:
+        newi = i+i_adjust
+        newj = j+j_adjust
+        if newi > -1 and newi < n and newj > -1 and newj < n:
+            if solution[newi][newj] == 1:
+                current_blob_size += 1
+
+            if solution[newi][newj] == 0:
+                if current_blob_size != 0:
+                    adjacent_blobs.append(current_blob_size)
+                current_blob_size = 0
+    
+    # check if we need to add first and last "blobs" together
+    # this only matters if the adjacent cells form a circle, so we only check
+    # for those that are fully within the boundaries of the puzzle
+    first_square_filled = False
+    last_square_filled = False
+
+    if i-1 > -1 and j-1 > -1:
+        if solution[i-1][j-1] == 1:
+            first_square_filled = True
+
+    if i+1 < n and j+1 < n:
+        if solution[i][j-1] == 1:
+            last_square_filled = True
+
+    if first_square_filled and last_square_filled and len(adjacent_blobs) > 1:
+        # pop returns the last thing and removes it
+        # we then add that thing to the first thing
+        adjacent_blobs[0] += adjacent_blobs.pop()
+
+    adjacent_blobs.sort(reverse=True)
+    blob_string = ''
+    for blob in adjacent_blobs:
+        blob_string += str(blob)
+    
+    if blob_string != '' and int(blob_string) == solution[i][j]:
+        return True
+    else:
+        print('hint', solution[i][j], 'at', i, j, 'is not satisfied')
+        print('adjacent blobs:', adjacent_blobs)
+        print('blob_string:', blob_string)
+        return False
+
 def validate_solution(solution):
     print('checking solution')
     print(solution)
@@ -82,8 +140,7 @@ def validate_solution(solution):
         print('solution has no filled cells! That can\'t be right.... can it?')
         return False
 
-    # TODO: does it form one continuous line?
-    # if len(filled_cell_locations) > 0:
+    # does it form one continuous line?
     start_element = next(iter(filled_cell_locations))
     unexplored = explore(start_element, filled_cell_locations)
     if len(unexplored) > 0:
@@ -91,7 +148,11 @@ def validate_solution(solution):
         return False
 
     # TODO: are all hints satisfied?
+    for (i, j) in hint_locations:
+        if not check_if_hint_is_satisfied(i, j, solution):
+            return False
     
+    print('solution valid!')
     return True
 
 def solve(puzzle):
