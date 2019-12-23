@@ -62,7 +62,7 @@ def check_if_hint_is_satisfied(i, j, solution):
             if solution[newi][newj] == puzzle.FILLED_CELL:
                 current_blob_size += 1
 
-            if solution[newi][newj] == 0:
+            if solution[newi][newj] == puzzle.EMPTY_CELL:
                 if current_blob_size != 0:
                     adjacent_blobs.append(current_blob_size)
                 current_blob_size = 0
@@ -76,8 +76,6 @@ def check_if_hint_is_satisfied(i, j, solution):
     if i-1 > -1 and j-1 > -1:
         if solution[i-1][j-1] == puzzle.FILLED_CELL:
             first_square_filled = True
-
-    if i+1 < n and j+1 < n:
         if solution[i][j-1] == puzzle.FILLED_CELL:
             last_square_filled = True
 
