@@ -59,7 +59,7 @@ def check_if_hint_is_satisfied(i, j, solution):
         newi = i+i_adjust
         newj = j+j_adjust
         if newi > -1 and newi < n and newj > -1 and newj < n:
-            if solution[newi][newj] == 1:
+            if solution[newi][newj] == puzzle.FILLED_CELL:
                 current_blob_size += 1
 
             if solution[newi][newj] == 0:
@@ -74,11 +74,11 @@ def check_if_hint_is_satisfied(i, j, solution):
     last_square_filled = False
 
     if i-1 > -1 and j-1 > -1:
-        if solution[i-1][j-1] == 1:
+        if solution[i-1][j-1] == puzzle.FILLED_CELL:
             first_square_filled = True
 
     if i+1 < n and j+1 < n:
-        if solution[i][j-1] == 1:
+        if solution[i][j-1] == puzzle.FILLED_CELL:
             last_square_filled = True
 
     if first_square_filled and last_square_filled and len(adjacent_blobs) > 1:
@@ -130,7 +130,7 @@ def validate_solution(solution):
                 return False
             
             # store locations of 1s for checking continuous path later
-            if solution[row_i][col_i] == 1:
+            if solution[row_i][col_i] == puzzle.FILLED_CELL:
                 filled_cell_locations.add((row_i, col_i))
             # store locations of hints for checking hints later
             else:
